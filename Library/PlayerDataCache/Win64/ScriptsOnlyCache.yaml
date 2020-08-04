@@ -1,5 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
+    Assembly-CSharp.dll:
+    - BallScript
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
@@ -73,13 +75,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13256}
     - Class: 114
-      Script: {instanceID: 13654}
+      Script: {instanceID: 13470}
     - Class: 114
-      Script: {instanceID: 13928}
+      Script: {instanceID: 13656}
     - Class: 114
-      Script: {instanceID: 14264}
+      Script: {instanceID: 13930}
     - Class: 114
-      Script: {instanceID: 14284}
+      Script: {instanceID: 14266}
+    - Class: 114
+      Script: {instanceID: 14286}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -87,6 +91,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -453,6 +459,12 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BallScript
+  - hash:
+      serializedVersion: 2
       Hash: 8001a5f7502aab37e42206da015e6914
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -586,5 +598,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: "D:/OctoBouncer/Yeni klas\xF6r/OctoBouncer Desktop New/OctoBouncer
-    Desktop.exe"
+  playerPath: C:/Users/sndemir/Desktop/OctoBouncer Desktop.exe
