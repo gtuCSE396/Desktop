@@ -46,4 +46,6 @@ MonoBehaviour:
   circleSprite: {fileID: 21300000, guid: 195f36fa5ae40c14ca4c502f9cd0683d, type: 3}
   dataHolderObject: {fileID: 5852969492595266009, guid: 13e8ba148860d5f44a19b476386f85aa,
     type: 3}
-  graphMode: 0
+  xGraphPanelObject: {fileID: 0}
+  yGraphPanelObject: {fileID: 0}
+  distanceGraphPanelObject: {fileID: 0}
