@@ -11,12 +11,17 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject xObject;
     [SerializeField] private GameObject yObject;
     [SerializeField] private GameObject distanceObject;
+    [SerializeField] private GameObject originXObject;
+    [SerializeField] private GameObject originYObject;
 
     private Transform ballTransform;
     private Transform plexiTransform;
     private Text positionXText;
     private Text positionYText;
     private Text DistanceText;
+
+    private Text originXText;
+    private Text originYText;
 
     private float currentX;
     private float currentY;
@@ -31,18 +36,17 @@ public class UIHandler : MonoBehaviour
         plexiTransform = plexiObject.GetComponent<Transform>();
         positionXText = xObject.GetComponent<Text>();
         positionYText = yObject.GetComponent<Text>();
+        originXText = originXObject.GetComponent<Text>();
+        originYText = originYObject.GetComponent<Text>();
         DistanceText = distanceObject.GetComponent<Text>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisplayXYDistanceOriginXOriginY(float X, float Y, float Distance, float originX, float originY)
     {
-        currentX = ballTransform.position.x - plexiTransform.position.x;
-        currentY = ballTransform.position.z - plexiTransform.position.z;
-        currentDistance = ballTransform.position.y - plexiTransform.position.y;
-
-        positionXText.text = "Position X: " + System.Math.Round(currentX, 2);
-        positionYText.text = "Position Y: " + System.Math.Round(currentY, 2);
-        DistanceText.text = "Distance: " + System.Math.Round(currentDistance, 2);
+        positionXText.text = "Position X: " + X;
+        positionYText.text = "Position Y: " + Y;
+        DistanceText.text = "Distance: " + Distance;
+        originXText.text = "Origin X: " + originX;
+        originYText.text = "Origin Y: " + originY;
     }
 }
