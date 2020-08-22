@@ -82,14 +82,13 @@
     <Compile Include="Assets\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\CodeMonkey\Utils\World_Sprite.cs" />
-    <Compile Include="Assets\ConnectionHandler.cs" />
     <Compile Include="Assets\Scripts\Date.cs" />
     <Compile Include="Assets\Scripts\DateText.cs" />
+    <Compile Include="Assets\Scripts\Hardware Mode\ConnectionHandler.cs" />
     <Compile Include="Assets\Scripts\Hardware Mode\Hard_BallHeightHandler.cs" />
     <Compile Include="Assets\Scripts\Hardware Mode\Hard_BallLocationHandler.cs" />
     <Compile Include="Assets\Scripts\Hardware Mode\Hard_DrawGraph.cs" />
     <Compile Include="Assets\Scripts\Hardware Mode\Hard_PlexiMovement.cs" />
-    <Compile Include="Assets\Scripts\Hardware Mode\Hard_SimulationConverter.cs" />
     <Compile Include="Assets\Scripts\Hardware Mode\Hard_UIHandler.cs" />
     <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\Simulation Mode\Sim_BallHeightHandler.cs" />

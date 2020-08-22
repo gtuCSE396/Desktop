@@ -21,19 +21,20 @@ public class Hard_BallLocationHandler : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         pMovement = PlexiObject.GetComponent<Hard_PlexiMovement>();
         ballTransform = ballObject.GetComponent<RectTransform>();
 
         originXPosition = ballTransform.position.x;     // Save initial position of the ball
         originYPosition = ballTransform.position.y;
-
-        originX = pMovement.originXValue;      
-        originY = pMovement.originYValue;
-
     }
 
+    private void Start()
+    {
+        originX = pMovement.originXValue;
+        originY = pMovement.originYValue;
+    }
 
     public void UpdateBallLocation(float xPosition, float yPosition)
     {
