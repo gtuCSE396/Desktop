@@ -11,6 +11,9 @@ public class ClientSide : MonoBehaviour
 {
     public InputField messageText;
 
+    public string hostIp = "127.0.0.1";
+    public int portNo = 9000;
+    
     private bool socketReady;
     private TcpClient socket;
     private NetworkStream stream;
@@ -24,8 +27,8 @@ public class ClientSide : MonoBehaviour
             return;
         
         // default values
-        string host = "127.0.0.1";
-        int port = 9000;
+        string host = hostIp;
+        int port = portNo;
 
         // string h;
         // int p;
