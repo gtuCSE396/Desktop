@@ -82,6 +82,7 @@
     <Compile Include="Assets\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\CodeMonkey\Utils\World_Sprite.cs" />
+    <Compile Include="Assets\ConnectionHandler.cs" />
     <Compile Include="Assets\Scripts\BackupLog.cs" />
     <Compile Include="Assets\Scripts\BallHeightHandler.cs" />
     <Compile Include="Assets\Scripts\BallLocationHandler.cs" />
@@ -89,14 +90,11 @@
     <Compile Include="Assets\Scripts\Date.cs" />
     <Compile Include="Assets\Scripts\DateText.cs" />
     <Compile Include="Assets\Scripts\DrawGraph.cs" />
-    <Compile Include="Assets\Scripts\PingPongXY.cs" />
-    <Compile Include="Assets\Scripts\PingPongZ.cs" />
-    <Compile Include="Assets\Scripts\SceneChanger.cs" />
+    <Compile Include="Assets\Scripts\PlexiMovement.cs" />
     <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\SetHeight.cs" />
     <Compile Include="Assets\Scripts\SimulateButtonScript.cs" />
     <Compile Include="Assets\Scripts\SimulationConverter.cs" />
-    <Compile Include="Assets\Scripts\SystemController.cs" />
     <Compile Include="Assets\Scripts\TimeText.cs" />
     <Compile Include="Assets\Scripts\UIHandler.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

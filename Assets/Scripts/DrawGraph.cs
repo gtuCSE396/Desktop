@@ -22,10 +22,8 @@ public class DrawGraph : MonoBehaviour {
     private RectTransform distanceGraphPanelContainer;
 
     private int counter = 1;
-    private int dataHolderIndex = 0;
     private int queuesIndex = 0;
     private static int  logCounter = 0;
-    float customTimer;
 
     private int maxGraphElement = 17;
 
@@ -49,51 +47,40 @@ public class DrawGraph : MonoBehaviour {
         yGraphPanelContainer = yGraphPanelObject.GetComponent<RectTransform>();
         distanceGraphPanelContainer = distanceGraphPanelObject.GetComponent<RectTransform>();
 
-        stop = true;
-        customTimer = Time.fixedTime;
+        stop = false;
     }
 
-    private void FixedUpdate()
+    public void UpdateGraphs(float xPosition, float yPosition, float zPosition)
     {
-        if (Time.fixedTime >= customTimer && !stop) // Do the job inside this condition once in a second.
+        if (counter != maxGraphElement)
+            counter++;
+
+        if (counter == maxGraphElement)
         {
-            if (counter != maxGraphElement)
-                counter++;
+            shiftArrayLeft(xQueue);         // If maximum element on the graph exceeded, then shift the array to the left and put the element to the right-most space.
+            shiftArrayLeft(yQueue);
+            shiftArrayLeft(distanceQueue);
 
-            if(counter == maxGraphElement)
+            if (GameObject.FindGameObjectsWithTag("mortal").Length > 0) // This condition kills the previous graph nodes and connections.
             {
-                shiftArrayLeft(xQueue);         // If maximum element on the graph exceeded, then shift the array to the left and put the element to the right-most space.
-                shiftArrayLeft(yQueue);
-                shiftArrayLeft(distanceQueue);
-
-                if (GameObject.FindGameObjectsWithTag("mortal").Length > 0) // This condition kills the previous graph nodes and connections.
-                {
-                    GameObject[] mortals = GameObject.FindGameObjectsWithTag("mortal");
-                    foreach (GameObject mortal in mortals)
+                GameObject[] mortals = GameObject.FindGameObjectsWithTag("mortal");
+                foreach (GameObject mortal in mortals)
                     GameObject.Destroy(mortal);
-                }               
             }
-
-            xQueue[queuesIndex] = dHolder.xValues[dataHolderIndex];         // Update the current data on the graph.
-            yQueue[queuesIndex] = dHolder.yValues[dataHolderIndex];
-            distanceQueue[queuesIndex] = dHolder.zValues[dataHolderIndex];
-
-            dataHolderIndex++;
-
-            if (dataHolderIndex == dHolder.listMaxElements)        // If data list ends, start from the beginning 
-                dataHolderIndex = 0;
-
-            if(queuesIndex != maxGraphElement - 1)
-            {
-                queuesIndex++;
-            }
-
-            ShowGraph(xQueue, xGraphPanelContainer);            // Display graphs on each panel individually.
-            ShowGraph(yQueue, yGraphPanelContainer);
-            ShowGraph(distanceQueue, distanceGraphPanelContainer);
-
-            customTimer = Time.fixedTime + 0.5f;
         }
+
+        xQueue[queuesIndex] = (int)xPosition;         // Update the current data on the graph.
+        yQueue[queuesIndex] = (int)yPosition;
+        distanceQueue[queuesIndex] = (int)zPosition;
+
+        if (queuesIndex != maxGraphElement - 1)
+        {
+            queuesIndex++;
+        }
+
+        ShowGraph(xQueue, xGraphPanelContainer);            // Display graphs on each panel individually.
+        ShowGraph(yQueue, yGraphPanelContainer);
+        ShowGraph(distanceQueue, distanceGraphPanelContainer);
     }
 
     private GameObject CreateCircle(Vector2 anchoredPosition, RectTransform container) {         // Draws a node on the graph.
@@ -156,7 +143,6 @@ public class DrawGraph : MonoBehaviour {
         stop = true;
 
         queuesIndex = 0;
-        dataHolderIndex = 0;
         counter = 1;
 
         xQueue = new int[maxGraphElement];      // These arrays holds the current data on the graph
@@ -172,7 +158,6 @@ public class DrawGraph : MonoBehaviour {
     }
     public void StartAgain()
     {
-        customTimer = Time.fixedTime;
         stop = false;
     }
 

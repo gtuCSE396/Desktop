@@ -41,14 +41,15 @@ public class BallHeightHandler : MonoBehaviour
         if (Time.fixedTime >= customTimer && !stop)
         {
 
-            float zDistance = (float)(dHolder.zValues[index] - originZ) / resizingRatio;
-
-            ballTransform.position = new Vector3(originXPosition, originYPosition + zDistance);     // Apply the calculated distance
-            index++;
-            if (index == dHolder.listMaxElements)       // If data list ends, start from the beginning
-                index = 0;
+           
             customTimer = Time.fixedTime + 0.5f;
         }
+    }
+
+    public void UpdateBallHandler(float zPosition)
+    {
+        float zDistance = (float)(zPosition - originZ) / resizingRatio;
+        ballTransform.position = new Vector3(originXPosition, originYPosition + zDistance);     // Apply the calculated distance
     }
 
     public void Stop()

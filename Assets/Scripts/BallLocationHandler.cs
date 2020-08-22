@@ -41,20 +41,13 @@ public class BallLocationHandler : MonoBehaviour
         stop = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Time.fixedTime >= customTimer && !stop) 
-        {
-            int xDistance = (dHolder.xValues[index] - originX) / resizingRatio;     // Calculate the distance between origin and the ball
-            int yDistance = (dHolder.yValues[index] - originY) / resizingRatio;
 
-            ballTransform.position = new Vector3(originXPosition + xDistance, originYPosition + yDistance);     // Apply the calculated distance
-            index++;
-            if (index == dHolder.listMaxElements)       // If data list ends, start from the beginning
-                index = 0;
-            customTimer = Time.fixedTime + 0.5f;
-        }
+    public void UpdateBallLocation(float xPosition, float yPosition)
+    {
+        float xDistance = (xPosition - originX) / resizingRatio;     // Calculate the distance between origin and the ball
+        float yDistance = (yPosition - originY) / resizingRatio;
+
+        ballTransform.position = new Vector3(originXPosition + xDistance, originYPosition + yDistance);     // Apply the calculated distance
     }
     public void Stop()
     {

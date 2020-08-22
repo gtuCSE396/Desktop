@@ -40,7 +40,6 @@ public class UIHandler : MonoBehaviour
         originYText = originYObject.GetComponent<Text>();
         DistanceText = distanceObject.GetComponent<Text>();
     }
-
     public void DisplayXYDistanceOriginXOriginY(float X, float Y, float Distance, float originX, float originY)
     {
         positionXText.text = "Position X: " + X;

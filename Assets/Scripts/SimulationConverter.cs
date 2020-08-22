@@ -74,6 +74,7 @@ public class SimulationConverter : MonoBehaviour
 
             uihandler.DisplayXYDistanceOriginXOriginY(dHolder.xValues[index], dHolder.yValues[index], dHolder.zValues[index], (dHolder.xMaxValue - dHolder.xMinValue)/2, (dHolder.yMaxValue - dHolder.yMinValue) / 2);
 
+
             index++;
             if (index == dHolder.listMaxElements)       // If data list ends, start from the beginning
                 index = 0;
