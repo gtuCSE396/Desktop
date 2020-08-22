@@ -69,3 +69,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/.idea/.idea.Desktop/.idea/.gitignore
+/.idea/.idea.Desktop/.idea/encodings.xml
+/.idea/.idea.Desktop/.idea/indexLayout.xml
+/.idea/.idea.Desktop/.idea/misc.xml
+/.idea/.idea.Desktop/riderModule.iml
+/.idea/.idea.Desktop/.idea/vcs.xml
