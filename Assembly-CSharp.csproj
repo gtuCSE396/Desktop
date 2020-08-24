@@ -82,6 +82,7 @@
     <Compile Include="Assets\CodeMonkey\Utils\World_Bar.cs" />
     <Compile Include="Assets\CodeMonkey\Utils\World_Mesh.cs" />
     <Compile Include="Assets\CodeMonkey\Utils\World_Sprite.cs" />
+    <Compile Include="Assets\Scripts\ClientSide.cs" />
     <Compile Include="Assets\Scripts\Date.cs" />
     <Compile Include="Assets\Scripts\DateText.cs" />
     <Compile Include="Assets\Scripts\Hardware Mode\ConnectionHandler.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Scripts\Hardware Mode\Hard_PlexiMovement.cs" />
     <Compile Include="Assets\Scripts\Hardware Mode\Hard_UIHandler.cs" />
     <Compile Include="Assets\Scripts\SceneLoader.cs" />
+    <Compile Include="Assets\Scripts\Server.cs" />
     <Compile Include="Assets\Scripts\Simulation Mode\Sim_BallHeightHandler.cs" />
     <Compile Include="Assets\Scripts\Simulation Mode\Sim_BallLocationHandler.cs" />
     <Compile Include="Assets\Scripts\Simulation Mode\Sim_DrawGraph.cs" />
@@ -645,85 +647,85 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.0f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Runtime">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Path.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Triangle.Runtime">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="PsdPlugin">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Psdimporter.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.001">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Runtime">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Editor">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/Desktop/Desktop/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/mamik/Desktop/Job Stuff/Unity Projects/DesktopNew/Desktop/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
