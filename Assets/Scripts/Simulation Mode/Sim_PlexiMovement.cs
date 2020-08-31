@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Sim_PlexiMovement : MonoBehaviour
 {
@@ -10,9 +13,12 @@ public class Sim_PlexiMovement : MonoBehaviour
     [SerializeField] private GameObject UIObject;
     [SerializeField] private GameObject GraphObject;
     [SerializeField] private GameObject ballObject;
+    [SerializeField] private GameObject floorObject;
+
+    [SerializeField] private GameObject ButtonsObject;
     private Transform tForm;
     private Rigidbody rBody;
-    private bool moveUp;
+    private bool bounced;
     private float vibrationTimer;
     private float rotateTimer;
 
@@ -22,6 +28,8 @@ public class Sim_PlexiMovement : MonoBehaviour
     private Sim_DrawGraph drawGraph;
     private Transform ballTransform;
     private Rigidbody ballRigid;
+
+    private ButtonsHandler bHandler;
 
     public float xMaxValue;
     public float xMinValue;
@@ -35,8 +43,8 @@ public class Sim_PlexiMovement : MonoBehaviour
     public float originXValue;
     public float originYValue;
 
-    public float rotatePositionValue = 0.003f;
-    public float rotateVelocityValue = 0.01f;
+    public float rotatePositionValue = 0.1f;
+    public float rotateVelocityValue = 5f;
 
     private float reversedistanceFactor = 100f / 5f;
     private float reversexFactor = 500f / 3f;
@@ -45,6 +53,18 @@ public class Sim_PlexiMovement : MonoBehaviour
     private float currentXConverted;
     private float currentYConverted;
     private float currentZConverted;
+
+    public float balanceLocationX;
+    public float balanceLocationY;
+
+    float errorX;
+    float errorZ;
+
+
+    private bool ready;
+
+    public bool bouncing;
+    public bool balancing;
 
     private void Awake()
     {
@@ -69,91 +89,74 @@ public class Sim_PlexiMovement : MonoBehaviour
         ballRigid = ballObject.GetComponent<Rigidbody>();
         vibrationTimer = Time.fixedTime;
         rotateTimer = Time.fixedTime;
-        moveUp = false;
+        bounced = false;
         tForm = GetComponent<Transform>();
         rBody = GetComponent<Rigidbody>();
         uiHandler = UIObject.GetComponent<Sim_UIHandler>();
         blHandler = BallLocationHandlerObject.GetComponent<Sim_BallLocationHandler>();
         bhHandler = BallHeightObject.GetComponent<Sim_BallHeightHandler>();
+
+        bHandler = ButtonsObject.GetComponent<ButtonsHandler>();
+
+        ready = true;
+        balancing = true;
+        bouncing = false;
+
+        tForm.position = new Vector3(0, 0, 0);
+
+        balanceLocationX = originXValue;
+        balanceLocationY = originYValue;
     }
 
-    private void FixedUpdate()
+    private void Start()
     {
-        if (Time.fixedTime >= vibrationTimer)
-        {
-            // Switch direction
-            if (!moveUp)
-            {
-                moveUp = true;
-            }
-            else
-            {
-                moveUp = false;
-            }
-
-            // Do the vibration
-            if (moveUp)
-            {
-                rBody.AddForce(new Vector3(0, 5f), ForceMode.VelocityChange);
-            }
-            else
-            {
-                rBody.AddForce(rBody.velocity * -2, ForceMode.VelocityChange);
-            }
-
-            vibrationTimer = Time.fixedTime + 0.05f;
-        }
-        if (Time.fixedTime >= rotateTimer)
-        {
-
-            // Balance the ball by velocity
-
-            if (ballRigid.velocity.x > 0)
-            {
-                transform.Rotate(0, 0, rotateVelocityValue);
-            }
-            if (ballRigid.velocity.x < 0)
-            {
-                transform.Rotate(0, 0, -rotateVelocityValue);
-            }
-
-            if (ballRigid.velocity.z > 0)
-            {
-                transform.Rotate(-rotateVelocityValue, 0, 0);
-            }
-
-            if (ballRigid.velocity.z < 0)
-            {
-                transform.Rotate(rotateVelocityValue, 0, 0);
-            }
-
-            // Balance the ball by position
-
-            if (ballTransform.position.x > transform.position.x)
-            {
-                transform.Rotate(0, 0, rotatePositionValue);
-            }
-
-            if (ballTransform.position.x < transform.position.x)
-            {
-                transform.Rotate(0, 0, -rotatePositionValue);
-            }
-
-            if (ballTransform.position.z > transform.position.z)
-            {
-                transform.Rotate(-rotatePositionValue, 0, 0);
-            }
-
-            if (ballTransform.position.z < transform.position.z)
-            {
-                transform.Rotate(rotatePositionValue, 0, 0);
-            }
-
-            rotateTimer = Time.fixedTime + 0.02f;
-        }
     }
+
     void Update()
     {
+        if(bouncing == true)
+        {
+            rBody.isKinematic = false;
+            if (Time.fixedTime >= vibrationTimer && Mathf.Abs(errorX) < 10f && Mathf.Abs(errorZ) < 10f) 
+            {
+                // Do the vibration
+                if (ballTransform.position.y - transform.position.y <= 1f && ready)
+                {
+                    Debug.Log(ballTransform.position.y - transform.position.y);
+                    rBody.AddForce(new Vector3(0, 1.5f), ForceMode.VelocityChange);
+                    bounced = true;
+                    ready = false;
+                }
+                else
+                {
+                    rBody.velocity = Vector3.zero;
+                    rBody.MovePosition(new Vector3(0, 0, 0));
+                }
+
+                vibrationTimer = Time.fixedTime + 0.05f;
+            }
+            if (ballRigid.velocity.y < 0)
+            {
+                ready = true;
+            }
+        }
+        else
+        {
+            rBody.isKinematic = true;
+        }
+        if(balancing == true)
+        {
+
+            errorX = (transform.position.x - ballTransform.position.x) * reversexFactor - (originXValue - balanceLocationX);
+            errorZ = (transform.position.z - ballTransform.position.z) * reverseyFactor - (originYValue - balanceLocationY);
+
+            float balancingPowerX = ballRigid.velocity.x * rotateVelocityValue;
+            float balancingPowerZ = ballRigid.velocity.z * rotateVelocityValue;
+
+            transform.rotation = new Quaternion(0, 0, 0, 0);
+            transform.Rotate(new Vector3((errorZ * rotatePositionValue) - balancingPowerZ, 0, (-errorX * rotatePositionValue) + balancingPowerX));
+        }
+
         // X -> X, Y -> Distance, Z -> Y
 
         // X value
@@ -167,5 +170,90 @@ public class Sim_PlexiMovement : MonoBehaviour
         uiHandler.DisplayXYDistanceOriginXOriginY(currentXConverted, currentZConverted, currentYConverted, originXValue, originYValue);
         blHandler.UpdateBallLocation(currentXConverted, currentZConverted);
         bhHandler.UpdateBallHandler(currentYConverted);
+
     }
+    public void drawSquare()
+    {
+        StartCoroutine(squareCoroutine());
+    }
+
+    public void drawTriangle()
+    {
+        StartCoroutine(triangleCoroutine());
+    }
+
+    IEnumerator squareCoroutine()
+    {
+        bouncing = false;
+        balancing = true;
+
+        balanceLocationX = originXValue;
+        balanceLocationY = originYValue;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 150;
+        balanceLocationY = 400;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 400;
+        balanceLocationY = 400;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 400;
+        balanceLocationY = 150;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 150;
+        balanceLocationY = 150;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 150;
+        balanceLocationY = 400;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = originXValue;
+        balanceLocationY = originYValue;
+        bHandler.squareSwitchDeactivated();
+    }
+    IEnumerator triangleCoroutine()
+    {
+        bouncing = false;
+        balancing = true;
+
+        balanceLocationX = originXValue;
+        balanceLocationY = originYValue;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 250;
+        balanceLocationY = 400;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 400;
+        balanceLocationY = 150;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 150;
+        balanceLocationY = 150;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = 250;
+        balanceLocationY = 400;
+
+        yield return new WaitForSeconds(4);
+
+        balanceLocationX = originXValue;
+        balanceLocationY = originYValue;
+        bHandler.triangleSwitchDeactivated();
+    }
+
 }
