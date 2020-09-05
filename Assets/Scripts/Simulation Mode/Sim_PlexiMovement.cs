@@ -74,6 +74,8 @@ public class Sim_PlexiMovement : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Fixed?");
+
         xMaxValue = 500f;
         xMinValue = 0f;
 
