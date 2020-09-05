@@ -84,4 +84,13 @@ public class ClientSide : MonoBehaviour
         writer.WriteLine("desktop:" + messageText.text);
         writer.Flush();
     }
+
+    public void SendWithParameter(string data)
+    {
+        ConnectToServer();
+        if (!socketReady)
+            return;
+        writer.WriteLine(data);
+        writer.Flush();
+    }
 }

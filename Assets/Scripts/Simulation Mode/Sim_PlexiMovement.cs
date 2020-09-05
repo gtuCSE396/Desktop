@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -14,6 +13,8 @@ public class Sim_PlexiMovement : MonoBehaviour
     [SerializeField] private GameObject GraphObject;
     [SerializeField] private GameObject ballObject;
     [SerializeField] private GameObject floorObject;
+    [SerializeField] private GameObject clientObject;
+
 
     [SerializeField] private GameObject ButtonsObject;
     private Transform tForm;
@@ -59,6 +60,11 @@ public class Sim_PlexiMovement : MonoBehaviour
 
     float errorX;
     float errorZ;
+
+    float balancingPowerX;
+    float balancingPowerZ;
+
+    public int balanceMode = 1;
 
 
     private bool ready;
@@ -108,10 +114,6 @@ public class Sim_PlexiMovement : MonoBehaviour
         balanceLocationY = originYValue;
     }
 
-    private void Start()
-    {
-    }
-
     void Update()
     {
         if(bouncing == true)
@@ -150,11 +152,21 @@ public class Sim_PlexiMovement : MonoBehaviour
             errorX = (transform.position.x - ballTransform.position.x) * reversexFactor - (originXValue - balanceLocationX);
             errorZ = (transform.position.z - ballTransform.position.z) * reverseyFactor - (originYValue - balanceLocationY);
 
-            float balancingPowerX = ballRigid.velocity.x * rotateVelocityValue;
-            float balancingPowerZ = ballRigid.velocity.z * rotateVelocityValue;
+            balancingPowerX = ballRigid.velocity.x * rotateVelocityValue;
+            balancingPowerZ = ballRigid.velocity.z * rotateVelocityValue;
 
-            transform.rotation = new Quaternion(0, 0, 0, 0);
-            transform.Rotate(new Vector3((errorZ * rotatePositionValue) - balancingPowerZ, 0, (-errorX * rotatePositionValue) + balancingPowerX));
+            BalanceTheBall();
+            
+        }
+        else
+        {
+            errorX = (transform.position.x - ballTransform.position.x) * reversexFactor - (originXValue - originXValue);
+            errorZ = (transform.position.z - ballTransform.position.z) * reverseyFactor - (originYValue - originYValue);
+
+            balancingPowerX = ballRigid.velocity.x * rotateVelocityValue;
+            balancingPowerZ = ballRigid.velocity.z * rotateVelocityValue;
+
+            BalanceTheBall();
         }
 
         // X -> X, Y -> Distance, Z -> Y
@@ -162,9 +174,15 @@ public class Sim_PlexiMovement : MonoBehaviour
         // X value
         currentXConverted = originXValue + ballTransform.localPosition.x * reversexFactor;
         // Distance value
-        currentYConverted = (ballTransform.localPosition.y - transform.localPosition.y) * reversedistanceFactor;
-        //Y value
-        currentZConverted = originYValue + ballTransform.localPosition.z * reverseyFactor;
+        currentYConverted = (ballTransform.localPosition.y - transform.localPosition.y) * reversedistanceFactor - 14.2158f;
+        currentYConverted = (float)Mathf.Round(currentYConverted);
+        //currentYConverted -= 14.2158f; // dirty fix
+       //Y value
+       currentZConverted = originYValue + ballTransform.localPosition.z * reverseyFactor;
+
+        string data =  Mathf.Round(currentXConverted).ToString() + " " + Mathf.Round(currentZConverted).ToString() + " " + Mathf.Round(currentYConverted).ToString();
+
+        clientObject.GetComponent<ClientSide>().SendWithParameter(data);
 
         drawGraph.UpdateGraphs(currentXConverted, currentZConverted, currentYConverted);
         uiHandler.DisplayXYDistanceOriginXOriginY(currentXConverted, currentZConverted, currentYConverted, originXValue, originYValue);
@@ -220,6 +238,7 @@ public class Sim_PlexiMovement : MonoBehaviour
         balanceLocationX = originXValue;
         balanceLocationY = originYValue;
         bHandler.squareSwitchDeactivated();
+        bHandler.ActivateAll();
     }
     IEnumerator triangleCoroutine()
     {
@@ -254,6 +273,29 @@ public class Sim_PlexiMovement : MonoBehaviour
         balanceLocationX = originXValue;
         balanceLocationY = originYValue;
         bHandler.triangleSwitchDeactivated();
+        bHandler.ActivateAll();
+    }
+    public void balanceSoft()
+    {
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler((errorZ * rotatePositionValue) - balancingPowerZ, 0, (-errorX * rotatePositionValue) + balancingPowerX), Time.deltaTime * 10f);
+    }
+    public void balanceHard()
+    {
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+        transform.Rotate(new Vector3((errorZ * rotatePositionValue) - balancingPowerZ, 0, (-errorX * rotatePositionValue) + balancingPowerX));
+    }
+
+    public void BalanceTheBall()
+    {
+        if(balanceMode == 1)
+        {
+            balanceHard();
+        }
+        else if(balanceMode == 2)
+        {
+            balanceSoft();
+        }
     }
 
 }
