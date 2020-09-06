@@ -25,6 +25,9 @@ public class ButtonsHandler : MonoBehaviour
     [SerializeField] private GameObject Text1Object;
     [SerializeField] private GameObject Text2Object;
 
+    [SerializeField] private GameObject Error1Object;
+    [SerializeField] private GameObject Error2Object;
+
     private GameObject cloneBounceDeactivated;
     private GameObject cloneBounceActivated;
 
@@ -66,8 +69,44 @@ public class ButtonsHandler : MonoBehaviour
         Destroy(cloneBalanceDeactivated);
         cloneBalanceActivated = Instantiate(activatedObject, buttonBalanceObject.transform.position, buttonBalanceObject.transform.rotation, buttonBalanceObject.transform);
         balanceActivated = true;
-        simMovement.balanceLocationX = float.Parse(InputXObject.GetComponent<Text>().text);
-        simMovement.balanceLocationY = float.Parse(InputYObject.GetComponent<Text>().text);
+        float tempX = float.Parse(InputXObject.GetComponent<Text>().text);
+        float tempY = float.Parse(InputYObject.GetComponent<Text>().text);
+
+        Debug.Log(tempX);
+        if(tempX < 0)
+        {
+            simMovement.balanceLocationX = 0;
+            StartCoroutine(ShowError(1));
+        }
+
+        else if (tempX > 500)
+        {
+            simMovement.balanceLocationX = 500;
+            StartCoroutine(ShowError(1));
+        }
+
+        else
+        {
+            simMovement.balanceLocationX = tempX;
+        }
+
+        if (tempY < 0)
+        {
+            simMovement.balanceLocationY = 0;
+            StartCoroutine(ShowError(2));
+        }
+
+        else if (tempY > 500)
+        {
+            simMovement.balanceLocationY = 500;
+            StartCoroutine(ShowError(2));
+        }
+
+        else
+        {
+            simMovement.balanceLocationY = tempY;
+        }
+
         simMovement.balancing = true;
     }
 
@@ -242,5 +281,27 @@ public class ButtonsHandler : MonoBehaviour
         simMovement.balanceMode = 2;
         yield return new WaitForSeconds(2f);
         simMovement.balanceMode = 1;
+    }
+
+    IEnumerator ShowError(int errorIndex)
+    {
+        Text errorText;
+        if(errorIndex == 1)
+        {
+            errorText = Error1Object.GetComponent<Text>();
+            errorText.text = "Out of bounds.(0 - 500)";
+            Error1Object.SetActive(true);
+            yield return new WaitForSeconds(2);
+            Error1Object.SetActive(false);
+        }
+        else
+        {
+            errorText = Error2Object.GetComponent<Text>();
+            errorText.text = "Out of bounds.(0 - 500)";
+            Error2Object.SetActive(true);
+            yield return new WaitForSeconds(2);
+            Error2Object.SetActive(false);
+        }
+           
     }
 }
