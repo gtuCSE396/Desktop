@@ -72,7 +72,6 @@ public class ButtonsHandler : MonoBehaviour
         float tempX = float.Parse(InputXObject.GetComponent<Text>().text);
         float tempY = float.Parse(InputYObject.GetComponent<Text>().text);
 
-        Debug.Log(tempX);
         if(tempX < 0)
         {
             simMovement.balanceLocationX = 0;
@@ -139,6 +138,7 @@ public class ButtonsHandler : MonoBehaviour
 
     public void squareSwitchActivated()
     {
+        StartCoroutine(BalanceSlowly());
         DeactivateAll();
         bounceSwitchDeactivated();
         countdown(24, 1);
@@ -157,6 +157,7 @@ public class ButtonsHandler : MonoBehaviour
 
     public void triangleSwitchActivated()
     {
+        StartCoroutine(BalanceSlowly());
         DeactivateAll();
         bounceSwitchDeactivated();
         countdown(20, 2);

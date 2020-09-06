@@ -20,6 +20,7 @@ public class Sim_PlexiMovement : MonoBehaviour
     private Transform tForm;
     private Rigidbody rBody;
     private bool bounced;
+    private bool bouncedBackup;
     private float vibrationTimer;
     private float rotateTimer;
 
@@ -109,6 +110,7 @@ public class Sim_PlexiMovement : MonoBehaviour
         bouncing = false;
 
         tForm.position = new Vector3(0, 0, 0);
+        rBody.isKinematic = true;
 
         balanceLocationX = originXValue;
         balanceLocationY = originYValue;
@@ -116,39 +118,19 @@ public class Sim_PlexiMovement : MonoBehaviour
 
     void Update()
     {
-        if(bouncing == true)
-        {
-            rBody.isKinematic = false;
-            if (Time.fixedTime >= vibrationTimer && Mathf.Abs(errorX) < 10f && Mathf.Abs(errorZ) < 10f) 
-            {
-                // Do the vibration
-                if (ballTransform.position.y - transform.position.y <= 1f && ready)
-                {
-                    Debug.Log(ballTransform.position.y - transform.position.y);
-                    rBody.AddForce(new Vector3(0, 1.5f), ForceMode.VelocityChange);
-                    bounced = true;
-                    ready = false;
-                }
-                else
-                {
-                    rBody.velocity = Vector3.zero;
-                    rBody.MovePosition(new Vector3(0, 0, 0));
-                }
+        Debug.Log("ErrorX = " + Mathf.Abs(errorX));
+        Debug.Log("ErrorZ = " + Mathf.Abs(errorZ));
+        Debug.Log("ErrorBouncing = " + bouncing);
+        Debug.Log("ErrorBounbounced = " + bounced);
 
-                vibrationTimer = Time.fixedTime + 0.05f;
-            }
-            if (ballRigid.velocity.y < 0)
-            {
-                ready = true;
-            }
-        }
-        else
+        if (bouncing && !bounced && ballTransform.position.y - transform.position.y <= 1f && Mathf.Abs(errorX) < 10f && Mathf.Abs(errorZ) < 10f)
         {
-            rBody.isKinematic = true;
+            bounced = true;
+            StartCoroutine(BounceBall());
         }
+
         if(balancing == true)
         {
-
             errorX = (transform.position.x - ballTransform.position.x) * reversexFactor - (originXValue - balanceLocationX);
             errorZ = (transform.position.z - ballTransform.position.z) * reverseyFactor - (originYValue - balanceLocationY);
 
@@ -204,6 +186,8 @@ public class Sim_PlexiMovement : MonoBehaviour
     {
         bouncing = false;
         balancing = true;
+
+        yield return new WaitForSeconds(0.4f); // Wait for drawing
 
         balanceLocationX = originXValue;
         balanceLocationY = originYValue;
@@ -296,6 +280,20 @@ public class Sim_PlexiMovement : MonoBehaviour
         {
             balanceSoft();
         }
+    }
+
+    IEnumerator BounceBall()
+    {
+        rBody.isKinematic = false;
+        Debug.Log("Assigned jumped though" + bounced);
+        rBody.AddForce(new Vector3(0, 2f), ForceMode.VelocityChange);
+        yield return new WaitForSeconds(0.2f);
+        rBody.velocity = Vector3.zero;
+        rBody.position = Vector3.zero;
+        yield return new WaitForSeconds(0.1f);
+        rBody.isKinematic = true;
+        Debug.Log("Assigned false though" + bounced);
+        bounced = false;
     }
 
 }
