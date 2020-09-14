@@ -6,19 +6,30 @@ using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UI;
 using Color = UnityEngine.UI.ColorBlock;
+using System.Linq;
 
 public class ClientSide : MonoBehaviour
 {
+    [SerializeField] private GameObject ConnectionHandlerObject;
+    [SerializeField] private GameObject plexiObject;
+
+    private Hard_PlexiMovement hpMovement;
     public InputField messageText;
 
     public string hostIp = "127.0.0.1";
     public int portNo = 9000;
     
-    private bool socketReady;
+    public bool socketReady;
     private TcpClient socket;
     private NetworkStream stream;
     private StreamWriter writer;
     private StreamReader reader;
+
+    private void Start()
+    {
+        hpMovement = plexiObject.GetComponent<Hard_PlexiMovement>();
+    }
+
 
     public void ConnectToServer()
     {
@@ -68,21 +79,11 @@ public class ClientSide : MonoBehaviour
                     OnIncomingData(data);
                 }
             }
-        }
+        }        
     }
 
     private void OnIncomingData(string data)
     {
-        Debug.Log("Incoming Data: " + data);
-    }
-
-    public void Send()
-    {
-        ConnectToServer();
-        if (!socketReady)
-            return;
-        writer.WriteLine("desktop:" + messageText.text);
-        writer.Flush();
     }
 
     public void SendWithParameter(string data)
@@ -92,5 +93,6 @@ public class ClientSide : MonoBehaviour
             return;
         writer.WriteLine(data);
         writer.Flush();
+        Debug.Log("Client: Send Complete : " + data);
     }
 }

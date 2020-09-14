@@ -72,9 +72,9 @@ public class Hard_DrawGraph : MonoBehaviour {
             queuesIndex++;
         }
 
-        ShowGraph(xQueue, xGraphPanelContainer);            // Display graphs on each panel individually.
-        ShowGraph(yQueue, yGraphPanelContainer);
-        ShowGraph(distanceQueue, distanceGraphPanelContainer);
+        ShowGraph(xQueue, xGraphPanelContainer, 0);            // Display graphs on each panel individually.
+        ShowGraph(yQueue, yGraphPanelContainer, 0);
+        ShowGraph(distanceQueue, distanceGraphPanelContainer, 1);
     }
 
     private GameObject CreateCircle(Vector2 anchoredPosition, RectTransform container) {         // Draws a node on the graph.
@@ -90,7 +90,7 @@ public class Hard_DrawGraph : MonoBehaviour {
         return gameObject;
     }
 
-    private void ShowGraph(int[] values, RectTransform container) {                       // Displays the graph.
+    private void ShowGraph(int[] values, RectTransform container, int mode) {                       // Displays the graph.
 
         float graphHeight = container.rect.height;
         float yMaximum = 690f;
@@ -98,6 +98,8 @@ public class Hard_DrawGraph : MonoBehaviour {
         float xStartPoint = 30f;
         float yStartPoint = 15f;
         GameObject lastCircleGameObject = null;
+        if (mode == 1)
+            yMaximum = 200f;
         for (int i = 0; i < queuesIndex; i++) {
             float xPosition = xStartPoint + i * xSize;
             float yPosition = yStartPoint + (values[i] / yMaximum) * graphHeight;

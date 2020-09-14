@@ -8,9 +8,9 @@ public class Hard_BallHeightHandler : MonoBehaviour
 
     private RectTransform ballTransform;
 
-    private int originZ;
+    private float originZ;
 
-    private float resizingRatio = 0.6f;
+    private float resizingRatio = 1f;
 
     private float originXPosition;
     private float originYPosition;
@@ -20,14 +20,14 @@ public class Hard_BallHeightHandler : MonoBehaviour
     {
         ballTransform = ballObject.GetComponent<RectTransform>();
 
-        originXPosition = ballTransform.position.x;     // Save initial position of the ball
-        originYPosition = ballTransform.position.y;
-        originZ = 0;
+        originXPosition = ballTransform.localPosition.x;     // Save initial position of the ball
+        originYPosition = ballTransform.localPosition.y;
+        originZ = 0f;
     }
 
     public void UpdateBallHandler(float zPosition)
     {
-        float zDistance = (float)(zPosition - originZ) / resizingRatio;
-        ballTransform.position = new Vector3(originXPosition, originYPosition + zDistance);     // Apply the calculated distance
+        float zDistance =(zPosition - originZ) / resizingRatio;
+        ballTransform.localPosition = new Vector3(originXPosition, originYPosition + zDistance);     // Apply the calculated distance
     }
 }

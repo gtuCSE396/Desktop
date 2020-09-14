@@ -17,7 +17,8 @@ public class Hard_BallLocationHandler : MonoBehaviour
     private float originXPosition;
     private float originYPosition;
 
-    private float resizingRatio = 3f;
+    private float resizingRatioX = 1.5f;
+    private float resizingRatioY = 1f;
 
 
     // Start is called before the first frame update
@@ -38,8 +39,8 @@ public class Hard_BallLocationHandler : MonoBehaviour
 
     public void UpdateBallLocation(float xPosition, float yPosition)
     {
-        float xDistance = (xPosition - originX) / resizingRatio;     // Calculate the distance between origin and the ball
-        float yDistance = (yPosition - originY) / resizingRatio;
+        float xDistance = (xPosition - originX) / resizingRatioX;     // Calculate the distance between origin and the ball
+        float yDistance = -(yPosition - originY) / resizingRatioY;
 
         ballTransform.position = new Vector3(originXPosition + xDistance, originYPosition + yDistance);     // Apply the calculated distance
     }

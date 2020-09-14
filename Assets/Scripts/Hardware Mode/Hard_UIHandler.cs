@@ -44,7 +44,7 @@ public class Hard_UIHandler : MonoBehaviour
     {
         positionXText.text = "Position X: " + X;
         positionYText.text = "Position Y: " + Y;
-        DistanceText.text = "Distance: " + Distance;
+        DistanceText.text = "Distance: " + Mathf.Round(Distance * 100f) / 100f;
         originXText.text = "Origin X: " + originX;
         originYText.text = "Origin Y: " + originY;
     }
